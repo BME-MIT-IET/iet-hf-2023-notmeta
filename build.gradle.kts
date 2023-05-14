@@ -30,3 +30,9 @@ sonarqube {
         property("sonar.host.url", "https://sonarcloud.io")
     }
 }
+
+tasks.withType<Jar>{
+    manifest {
+        attributes["Main-Class"] = "Main"
+    }
+}
