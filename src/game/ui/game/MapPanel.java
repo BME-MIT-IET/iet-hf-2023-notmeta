@@ -45,6 +45,7 @@ public class MapPanel extends JLayeredPane {
         for(DField df: gameScene.GetVisibleFields()){
             df.setMapPanel(this);
             JButton fieldButton = df.Draw();
+            fieldButton.setName(df.GetID());
             fieldButton.setBounds(df.GetCoords().x - 25, df.GetCoords().y -25, 50,50);
             this.add(fieldButton, 0);
         }
@@ -52,6 +53,7 @@ public class MapPanel extends JLayeredPane {
         for(DVirologist dv: gameScene.GetVisibleVirologists()){
             dv.setMapPanel(this);
             JButton virologistButton = dv.Draw();
+            virologistButton.setName(dv.GetID());
             virologistButton.setBounds(gameScene.GetCurrentField().GetCoords().x + dv.GetCoords().x-10,
                     gameScene.GetCurrentField().GetCoords().y + dv.GetCoords().y-10, 20,20);
             virologistButton.setBorder(new EmptyBorder(new Insets(0,0,0,0)));

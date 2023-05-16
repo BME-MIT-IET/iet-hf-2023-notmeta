@@ -42,4 +42,5 @@ dependencies {
     implementation("io.cucumber:cucumber-java:6.10.4")
     implementation("io.cucumber:cucumber-junit:6.10.4")
     implementation("org.junit.vintage:junit-vintage-engine:5.7.2")
+    implementation("org.assertj:assertj-swing:3.17.0")
 }
