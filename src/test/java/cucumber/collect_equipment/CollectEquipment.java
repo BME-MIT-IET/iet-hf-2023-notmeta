@@ -17,13 +17,18 @@ public class CollectEquipment {
 
     @ParameterType("Axe|Cloak|Gloves|Sack")
     public Equipment equipmentType(String equipmentTypeString) {
-        return switch (equipmentTypeString) {
-            case "Axe" -> new Axe();
-            case "Cloak" -> new Cloak();
-            case "Gloves" -> new Gloves();
-            case "Sack" -> new Sack();
-            default -> throw new IllegalArgumentException("Unsupported equipment type: " + equipmentTypeString);
-        };
+        switch (equipmentTypeString) {
+            case "Axe":
+                return new Axe();
+            case "Cloak":
+                return new Cloak();
+            case "Gloves":
+                return new Gloves();
+            case "Sack":
+                return new Sack();
+            default:
+                throw new IllegalArgumentException("Unsupported equipment type: " + equipmentTypeString);
+        }
     }
 
     @Given("a virologist on a normal field who has already moved")
