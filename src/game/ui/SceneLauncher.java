@@ -4,6 +4,7 @@ import game.ui.end.EndScene;
 import game.ui.game.GameScene;
 import game.ui.menu.MenuScene;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -25,11 +26,17 @@ public class SceneLauncher {
         End
     }
 
+    private JFrame currentScene;
+
+    public JFrame getCurrentScene(){
+        return currentScene;
+    }
+
     /**
      * Constructor creates a MenuScene, pass itself as a parameter;
      */
     public SceneLauncher(){
-        new MenuScene(this);
+        currentScene = new MenuScene(this);
     }
 
     /**
@@ -39,13 +46,13 @@ public class SceneLauncher {
     public void SwitchScenes(GLOBALGAMESTATES globalgamestates){
         switch (globalgamestates){
             case Menu:
-                new MenuScene(this);
+                currentScene = new MenuScene(this);
                 break;
             case Game:
-                new GameScene(this,players);
+                currentScene = new GameScene(this,players);
                 break;
             case End:
-                new EndScene(this);
+                currentScene = new EndScene(this);
                 break;
         }
     }
