@@ -4,6 +4,7 @@ repositories {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    System.setProperty("java.awt.headless", "true")
 }
 
 plugins {
