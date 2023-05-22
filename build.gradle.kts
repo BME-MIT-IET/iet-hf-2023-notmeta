@@ -1,14 +1,25 @@
+
 repositories {
     mavenCentral()
+}
+
+plugins {
+    application
+    id("org.sonarqube") version("4.0.0.2929")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-plugins {
-    id("org.sonarqube") version("4.0.0.2929")
-    application
+tasks.withType<Jar>{
+    manifest {
+        attributes["Main-Class"] = "Main"
+    }
+}
+
+tasks.withType(JavaCompile::class) {
+    options.release.set(11)
 }
 
 application {
