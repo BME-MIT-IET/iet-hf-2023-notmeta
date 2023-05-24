@@ -16,21 +16,21 @@ public class MoveVirologistToNormalField {
     @Given("virologist is on a field and it is his turn")
     public void virologist_is_on_a_field_and_it_is_his_turn() {
         controller = new Controller();
-        controller.CreateField(fieldType, startFieldId);
-        controller.CreateField(fieldType, endFieldId);
-        controller.NeighborFields(startFieldId, endFieldId);
-        controller.CreateVirologist(virologistId, startFieldId);
-        controller.Start();
+        controller.createField(fieldType, startFieldId);
+        controller.createField(fieldType, endFieldId);
+        controller.neighborFields(startFieldId, endFieldId);
+        controller.createVirologist(virologistId, startFieldId);
+        controller.start();
     }
 
     @When("virologist uses the move action")
     public void virologist_uses_the_move_action() {
-        assertEquals(startFieldId, controller.GetCurrentField().GetFieldID());
-        controller.MoveVirologist(1);
+        assertEquals(startFieldId, controller.getCurrentField().getFieldID());
+        controller.moveVirologist(1);
     }
 
     @Then("virologist moves to the next available normal field")
     public void virologist_moves_to_the_next_available_normal_field() {
-        assertEquals(endFieldId, controller.GetCurrentField().GetFieldID());
+        assertEquals(endFieldId, controller.getCurrentField().getFieldID());
     }
 }

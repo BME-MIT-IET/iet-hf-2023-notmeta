@@ -8,80 +8,83 @@ import game.ui.game.map.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  JFrame to contain the GamePanel
  */
-public class GameScene extends JFrame{
-    private Controller controller;
-    private ArrayList<DField> dmap;
-    private ArrayList<DVirologist> dVirologists;
+public class GameScene extends JFrame {
+    private final Controller controller;
+    private final ArrayList<DField> dmap;
+    private final ArrayList<DVirologist> dVirologists;
 
     /**
      *constructor of the GameScene
      */
     public GameScene(SceneLauncher sl, ArrayList<String> players){
         this.setTitle("Game");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(SceneLauncher.Gamewidth, SceneLauncher.Gameheight);
         this.setLocationRelativeTo(null);
         this.dmap = new ArrayList<>();
         this.dVirologists = new ArrayList<>();
         controller = new Controller(); //make a new controller for the game
-        controller.SetSceneLauncher(sl);
-        controller.ImportMap("map.txt");
+        controller.setSceneLauncher(sl);
+        controller.importMap("map.txt");
 
         //if less than 4 player is playing deletes the unnecessary virologists
-        while(players.size() < controller.GetVirologists().size()){
-            controller.GetVirologists().get(controller.GetVirologists().size()-1).GetRoute().GetLocation().GetVirologists().remove(controller.GetVirologists().get(controller.GetVirologists().size()-1));
-            controller.GetVirologists().remove(controller.GetVirologists().size()-1);
+        while(players.size() < controller.getVirologists().size()){
+            controller.getVirologists().get(controller.getVirologists().size()-1).GetRoute().GetLocation().GetVirologists().remove(controller.getVirologists().get(controller.getVirologists().size()-1));
+            controller.getVirologists().remove(controller.getVirologists().size()-1);
         }
         //renames the virologists
         for (int i=0; i<players.size();i++){
-            controller.GetVirologists().get(i).SetName(players.get(i));
+            controller.getVirologists().get(i).SetName(players.get(i));
         }
         //creates DVirologists from the Virologists with the same ID
         for (int i=0; i<players.size();i++){
-            Virologist v = controller.GetVirologists().get(i);
+            Virologist v = controller.getVirologists().get(i);
             dVirologists.add(new DVirologist(v.GetName(), i+1));
         }
         //creates DFields from the Fields with the same ID
-        for(Field f :controller.GetMap()){
+        for(Field f :controller.getMap()){
             String type = f.GetType();
             switch (type){
                 case "normal":
-                    dmap.add(new DNormal(f.GetFieldID()));
+                    dmap.add(new DNormal(f.getFieldID()));
                     break;
                 case "laboratory":
-                    dmap.add(new DLaboratory(f.GetFieldID()));
+                    dmap.add(new DLaboratory(f.getFieldID()));
                     break;
                 case "bearlaboratory":
-                    dmap.add(new DLaboratory(f.GetFieldID())); //has the same graphics to fool players
+                    dmap.add(new DLaboratory(f.getFieldID())); //has the same graphics to fool players
                     break;
                 case "warehouse":
-                    dmap.add(new DWareHouse(f.GetFieldID()));
+                    dmap.add(new DWareHouse(f.getFieldID()));
                     break;
                 case "shelter":
-                    dmap.add(new DShelter(f.GetFieldID()));
+                    dmap.add(new DShelter(f.getFieldID()));
                     break;
             }
         }
         //reads the coords of the DFields
         for(int i = 0; i < dmap.size(); i++){
-            dmap.get(i).SetCoords(controller.GetFieldCoords().get(i));
+            dmap.get(i).SetCoords(controller.getFieldCoords().get(i));
         }
         //sets the neighbors of the DFields
-        for(Field f :controller.GetMap()){
-            DField df1 = FindDFieldByID(f.GetFieldID());
+        for(Field f :controller.getMap()){
+            DField df1 = findDFieldByID(f.getFieldID());
             for(int d :f.GetDirections()){
-                String ID = f.GetNeighbour(d).GetFieldID();
-                DField df2 = FindDFieldByID(ID);
-                df1.AddNeighbor(df2);
+                String id = f.GetNeighbour(d).getFieldID();
+                DField df2 = findDFieldByID(id);
+                if(df1 != null && df2 != null) {
+                    df1.AddNeighbor(df2);
+                }
             }
         }
         //starts the game and adds the GamePanel
-        controller.Start();
+        controller.start();
         this.add(new GamePanel(this, sl, players, controller));
         this.pack();
         this.setVisible(true);
@@ -89,24 +92,24 @@ public class GameScene extends JFrame{
 
     /**
      * Finds the DField by ID
-     * @param ID the ID
+     * @param id the ID
      * @return the DField
      */
-    private DField FindDFieldByID(String ID){
+    private DField findDFieldByID(String id){
         for(DField d : dmap)
-            if(d.GetID().equals(ID))
+            if(d.getId().equals(id))
                 return d;
         return null;
     }
 
     /**
      * Finds DVirologist by name
-     * @param ID the name of the Virologist
+     * @param id the name of the Virologist
      * @return the Virologist
      */
-    private DVirologist FindDVirologistByName(String ID){
+    private DVirologist findDVirologistByName(String id){
         for(DVirologist d : dVirologists)
-            if(d.GetID().equals(ID))
+            if(d.getId().equals(id))
                 return d;
         return null;
     }
@@ -115,11 +118,11 @@ public class GameScene extends JFrame{
      * Finds the visible Virologists by looking at the current Field
      * @return the visible Virologists
      */
-    public ArrayList<DVirologist> GetVisibleVirologists(){
+    public List<DVirologist> getVisibleVirologists(){
         ArrayList<DVirologist> visible = new ArrayList<>();
-        Field f = controller.GetCurrentVirologist().GetRoute().GetLocation();
+        Field f = controller.getCurrentVirologist().GetRoute().GetLocation();
         for(Virologist v: f.GetVirologists()){
-            visible.add(FindDVirologistByName(v.GetName()));
+            visible.add(findDVirologistByName(v.GetName()));
         }
         return visible;
     }
@@ -128,13 +131,16 @@ public class GameScene extends JFrame{
      * Finds the visible Fields by looking at the Rout of the current Virologist
      * @return the visible Field
      */
-    public ArrayList<DField> GetVisibleFields(){
-        Virologist v = controller.GetCurrentVirologist();
+    public List<DField> getVisibleFields(){
+        Virologist v = controller.getCurrentVirologist();
         ArrayList<DField> visible = new ArrayList<>();
         for(Field f : v.GetRoute().fields){
-            visible.add(FindDFieldByID(f.GetFieldID()));
+            visible.add(findDFieldByID(f.getFieldID()));
         }
-        DField actual = FindDFieldByID(v.GetRoute().GetLocation().GetFieldID());
+        DField actual = findDFieldByID(v.GetRoute().GetLocation().getFieldID());
+        if(actual == null) {
+            return List.of();
+        }
         for(DField df : actual.GetNeighbors()){
             if(!visible.contains(df))
                 visible.add(df);
@@ -143,8 +149,8 @@ public class GameScene extends JFrame{
     }
 
 
-    public DField GetCurrentField(){
-        return FindDFieldByID(controller.GetCurrentField().GetFieldID());
+    public DField getCurrentField(){
+        return findDFieldByID(controller.getCurrentField().getFieldID());
     }
 
 }

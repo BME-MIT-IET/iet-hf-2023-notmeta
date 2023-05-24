@@ -20,25 +20,25 @@ public class CreateAgentSuccessfully {
     @Given("virologist learned some genome, enough aminoacid and nucleotide")
     public void virologist_learned_some_genome_enough_aminoacid_and_nucleotide() {
         controller = new Controller();
-        controller.CreateField(fieldType, startFieldId);
-        controller.CreateVirologist(virologistId, startFieldId);
-        controller.GiveAminoacidToVirologist(5, virologistId);
-        controller.GiveNucleotideToVirologist(5, virologistId);
-        controller.TeachGenome(agentType, virologistId);
-        controller.Start();
+        controller.createField(fieldType, startFieldId);
+        controller.createVirologist(virologistId, startFieldId);
+        controller.giveAminoacidToVirologist(5, virologistId);
+        controller.giveNucleotideToVirologist(5, virologistId);
+        controller.teachGenome(agentType, virologistId);
+        controller.start();
     }
 
     @When("virologist tries to create agent")
     public void virologist_tries_to_create_agent() {
-        Virologist virologist = controller.GetCurrentVirologist();
+        Virologist virologist = controller.getCurrentVirologist();
         backpack = virologist.GetBackpack();
 
         assertEquals(1, virologist.GetLearnedGenomes().size());
         assertEquals(agentType, virologist.GetLearnedGenomes().get(0).GetName());
         assertEquals(0, backpack.GetAgents().size());
 
-        controller.MoveVirologist(0);
-        controller.CreateAgent(agentType);
+        controller.moveVirologist(0);
+        controller.createAgent(agentType);
     }
 
     @Then("virologist receives an agent")

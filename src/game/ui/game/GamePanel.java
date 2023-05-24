@@ -32,7 +32,7 @@ public class GamePanel extends JPanel {
         this.setBackground(Color.white);
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        mapPanel = new MapPanel(gameScene, sceneLauncher, players);
+        mapPanel = new MapPanel(gameScene);
         backpackPanel = new BackpackPanel(gameScene, sceneLauncher, players, controller);
         fieldPanel = new FieldPanel(gameScene, sceneLauncher, players, controller);
         actionPanel = new ActionPanel(gameScene, sceneLauncher, players, controller, backpackPanel, mapPanel);

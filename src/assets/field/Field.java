@@ -104,7 +104,7 @@ public abstract class Field implements java.io.Serializable{
 
     abstract public String GetType();
 
-	public String GetFieldID() {
+	public String getFieldID() {
 		return fieldID;
 	}
 

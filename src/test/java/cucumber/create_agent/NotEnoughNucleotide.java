@@ -20,24 +20,24 @@ public class NotEnoughNucleotide {
     @Given("virologist learned some genome, not enough nucleotide")
     public void virologist_learned_some_genome_not_enough_nucleotide() {
         controller = new Controller();
-        controller.CreateField(fieldType, startFieldId);
-        controller.CreateVirologist(virologistId, startFieldId);
-        controller.GiveAminoacidToVirologist(5, virologistId);
-        controller.TeachGenome(agentType, virologistId);
-        controller.Start();
+        controller.createField(fieldType, startFieldId);
+        controller.createVirologist(virologistId, startFieldId);
+        controller.giveAminoacidToVirologist(5, virologistId);
+        controller.teachGenome(agentType, virologistId);
+        controller.start();
     }
 
     @When("virologist tries to create new agent")
     public void virologist_tries_to_create_new_agent() {
-        Virologist virologist = controller.GetCurrentVirologist();
+        Virologist virologist = controller.getCurrentVirologist();
         backpack = virologist.GetBackpack();
 
         assertEquals(1, virologist.GetLearnedGenomes().size());
         assertEquals(agentType, virologist.GetLearnedGenomes().get(0).GetName());
         assertEquals(0, backpack.GetAgents().size());
 
-        controller.MoveVirologist(0);
-        controller.CreateAgent(agentType);
+        controller.moveVirologist(0);
+        controller.createAgent(agentType);
     }
 
     @Then("virologist receives no new agent")
