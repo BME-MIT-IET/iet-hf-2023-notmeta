@@ -47,3 +47,10 @@ tasks.withType<Jar>{
         attributes["Main-Class"] = "Main"
     }
 }
+
+dependencies {
+    implementation("junit:junit:4.13.1")
+    implementation("io.cucumber:cucumber-java:6.10.4")
+    implementation("io.cucumber:cucumber-junit:6.10.4")
+    implementation("org.junit.vintage:junit-vintage-engine:5.7.2")
+}
