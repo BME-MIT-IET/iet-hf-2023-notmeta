@@ -1,14 +1,8 @@
 package game.ui.game;
 
-import assets.virologist.Virologist;
-import game.ui.SceneLauncher;
-import game.ui.game.GameScene;
 import game.ui.game.map.DField;
 import game.ui.game.map.DVirologist;
-import game.ui.game.map.InGameButton;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
@@ -16,58 +10,54 @@ import java.awt.*;
  * JPanel that represents the map. It contains buttons as Fields and Virologists
  */
 public class MapPanel extends JLayeredPane {
-    private ArrayList<String> players;
-    private SceneLauncher sceneLauncher;
-    private GameScene gameScene;
-    private final int mapWidth = 600;
-    private final int mapHeight = 400;
-
+    private final GameScene gameScene;
     private DField activeField = null;
     private DVirologist activeVirologist = null;
 
-    public MapPanel(GameScene gameScene, SceneLauncher sl, ArrayList<String> players){
+    public MapPanel(GameScene gameScene){
         this.gameScene = gameScene;
-        this.sceneLauncher = sl;
-        this.players = players;
+        int mapWidth = 600;
+        int mapHeight = 400;
         this.setPreferredSize(new Dimension(mapWidth, mapHeight));
         setBorder(BorderFactory.createLineBorder(Color.black));
         this.setBackground(Color.white);
         this.setLayout(null);
 
     }
+    @Override
     public void paint(Graphics g){
         //remove the remaining buttons
         for(Component component : this.getComponents()){
             this.remove(component);
         }
         //for each DField that is to be displayed create a button
-        for(DField df: gameScene.GetVisibleFields()){
+        for(DField df: gameScene.getVisibleFields()){
             df.setMapPanel(this);
             JButton fieldButton = df.Draw();
-            fieldButton.setName(df.GetID());
+            fieldButton.setName(df.getId());
             fieldButton.setBounds(df.GetCoords().x - 25, df.GetCoords().y -25, 50,50);
             this.add(fieldButton, 0);
         }
         //for each DVirologist that is to be displayed create a button
-        for(DVirologist dv: gameScene.GetVisibleVirologists()){
+        for(DVirologist dv: gameScene.getVisibleVirologists()){
             dv.setMapPanel(this);
             JButton virologistButton = dv.Draw();
-            virologistButton.setName(dv.GetID());
-            virologistButton.setBounds(gameScene.GetCurrentField().GetCoords().x + dv.GetCoords().x-10,
-                    gameScene.GetCurrentField().GetCoords().y + dv.GetCoords().y-10, 20,20);
+            virologistButton.setName(dv.getId());
+            virologistButton.setBounds(gameScene.getCurrentField().GetCoords().x + dv.GetCoords().x-10,
+                    gameScene.getCurrentField().GetCoords().y + dv.GetCoords().y-10, 20,20);
             virologistButton.setBorder(new EmptyBorder(new Insets(0,0,0,0)));
             this.add(virologistButton, 1);
         }
         super.paint(g);
         double r = 35;
         //create lines between neighboring DFields
-        for(DField df: gameScene.GetVisibleFields()){
+        for(DField df: gameScene.getVisibleFields()){
             df.setMapPanel(this);
             for(DField neighbor: df.GetNeighbors()){
-                if(gameScene.GetVisibleFields().contains(neighbor)){
+                if(gameScene.getVisibleFields().contains(neighbor)){
                     int dx = neighbor.GetCoords().x - df.GetCoords().x;
                     int dy = neighbor.GetCoords().y - df.GetCoords().y;
-                    int dl = (int)Math.sqrt(dx*dx+dy*dy);
+                    int dl = (int)Math.sqrt((double)(dx * dx) + dy * dy);
                     double rx = dx * r / dl;
                     double ry = dy * r / dl;
                     int x1 = df.GetCoords().x + (int)rx;
