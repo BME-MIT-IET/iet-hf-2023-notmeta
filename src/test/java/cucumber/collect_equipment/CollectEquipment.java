@@ -34,39 +34,39 @@ public class CollectEquipment {
     @Given("a virologist on a normal field who has already moved")
     public void virologist_on_normal_field_who_has_already_moved() {
         controller = new Controller();
-        controller.CreateField("normal", normalFieldId);
-        controller.CreateVirologist(virologistId, normalFieldId);
-        controller.Start();
+        controller.createField("normal", normalFieldId);
+        controller.createVirologist(virologistId, normalFieldId);
+        controller.start();
         //Move the virologist to the same field its standing on
-        controller.MoveVirologistRandomOff(0);
+        controller.moveVirologistRandomOff(0);
     }
     @When("normal field has one {equipmentType}")
     public void normal_field_has_one_equipment_of_given_type(Equipment equipment) {
-        var field = controller.GetField(normalFieldId);
-        var bp = field.GetBackpack();
-        bp.Add(equipment);
+        var field = controller.getField(normalFieldId);
+        var bp = field.getBackpack();
+        bp.add(equipment);
     }
 
     @And("virologist tries to collect the first equipment it finds on the ground")
     public void virologist_tries_to_collect_the_first_equipment_it_finds_on_the_ground() {
         // Only one virologist, so that should be the current player
-        controller.TakeEquipment(1);
+        controller.takeEquipment(1);
     }
 
     @Then("the virologist should have one of {equipmentType}")
     public void the_virologist_should_have_one_of_equipmentType(Equipment equipment) {
-        var virologist = controller.GetCurrentVirologist();
-        var bp = virologist.GetBackpack();
-        var equipments = bp.GetEquipments();
+        var virologist = controller.getCurrentVirologist();
+        var bp = virologist.getBackpack();
+        var equipments = bp.getEquipments();
         assertEquals(1, equipments.size());
-        assertEquals(equipment.GetName(), equipments.get(0).GetName());
+        assertEquals(equipment.getName(), equipments.get(0).getName());
     }
 
     @And("the field will have zero of {equipmentType}")
     public void warehouse_has_quantity_amount_of_given_material(Equipment equipment) {
-        var field = controller.GetField(normalFieldId);
-        var bp = field.GetBackpack();
-        var equipments = bp.GetEquipments();
+        var field = controller.getField(normalFieldId);
+        var bp = field.getBackpack();
+        var equipments = bp.getEquipments();
         assertEquals(0, equipments.size());
     }
 }

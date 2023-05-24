@@ -28,15 +28,15 @@ public class Create implements CreateBehavior, java.io.Serializable{
     public void CreateAgent(Virologist v, Genome g) {
         int aminocost = g.getAminoCost();
         int nucleocost = g.getNucleoCost();
-        boolean isEnough = v.GetBackpack().EnoughMaterials(aminocost, nucleocost);
+        boolean isEnough = v.getBackpack().EnoughMaterials(aminocost, nucleocost);
         if(isEnough){
-            ArrayList<Aminoacid> aminos = v.GetBackpack().GetAminos();
+            ArrayList<Aminoacid> aminos = v.getBackpack().getAminos();
             for(int i = 0; i < g.getAminoCost(); i++){
-                v.GetBackpack().Remove(aminos.get(0));
+                v.getBackpack().Remove(aminos.get(0));
             }
-            ArrayList<Nucleotide> nucleos = v.GetBackpack().GetNucleotide();
+            ArrayList<Nucleotide> nucleos = v.getBackpack().getNucleotide();
             for(int i = 0; i < g.getNucleoCost(); i++){
-                v.GetBackpack().Remove(nucleos.get(0));
+                v.getBackpack().Remove(nucleos.get(0));
             }
             g.CreateAgent(v);
             v.SetState(State.AFTER_ACTION);

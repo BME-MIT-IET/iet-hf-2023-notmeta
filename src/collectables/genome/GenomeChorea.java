@@ -20,7 +20,7 @@ public class GenomeChorea extends Genome{
 	 */
 	public void CreateAgent(Virologist v) {
 		Chorea agent = new Chorea();
-		agent.AddToBackpack(v, v.GetBackpack());
+		agent.AddToBackpack(v, v.getBackpack());
 	}
 
 	@Override

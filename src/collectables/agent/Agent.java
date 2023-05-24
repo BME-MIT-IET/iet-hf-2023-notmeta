@@ -75,7 +75,7 @@ public abstract class Agent implements Collectable, java.io.Serializable {
 	 */
 	@Override
 	public boolean AddToBackpack(Virologist v, Backpack b) {
-		return v.GetBackpack().Add(this);
+		return v.getBackpack().add(this);
 	}
 
 	/**
@@ -86,8 +86,8 @@ public abstract class Agent implements Collectable, java.io.Serializable {
 	 */
 	@Override
 	public void RemoveFromBackpack(Virologist v, Backpack b) {
-		v.GetBackpack().Remove(this);
+		v.getBackpack().Remove(this);
 	}
 
-	public abstract String GetName();
+	public abstract String getName();
 }

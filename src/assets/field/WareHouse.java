@@ -31,8 +31,8 @@ public class WareHouse extends Field{
 
 	@Override
 	public void DestroyMaterials(){
-		backpack.GetAminos().clear();
-		backpack.GetNucleotide().clear();
+		backpack.getAminos().clear();
+		backpack.getNucleotide().clear();
 	}
 
 	@Override

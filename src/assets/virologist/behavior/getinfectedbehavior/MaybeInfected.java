@@ -30,7 +30,7 @@ public class MaybeInfected implements GetInfectedBehavior, java.io.Serializable 
         double d = Math.random();
         if(d < 0.823){
             a.Apply(v2);
-            v2.GetBackpack().AddApplied(a);
+            v2.getBackpack().AddApplied(a);
         }
     }
 

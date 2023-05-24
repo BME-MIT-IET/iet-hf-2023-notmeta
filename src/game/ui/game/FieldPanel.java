@@ -53,21 +53,21 @@ public class FieldPanel extends JPanel {
 
         g2d.drawString("Field", 150, 20);
 
-        Backpack backpack = controller.GetVirologists().get(controller.GetIndex()).GetRoute().GetLocation().GetBackpack();
+        Backpack backpack = controller.getVirologists().get(controller.getIndex()).GetRoute().GetLocation().getBackpack();
         g2d.drawString("Equipments", 25, 35);
-        for (int i = 0; i < backpack.GetEquipments().size(); i++) {
-            g2d.drawString(backpack.GetEquipments().get(i).GetName() + " " + backpack.GetEquipments().get(i).GetDurability(),
+        for (int i = 0; i < backpack.getEquipments().size(); i++) {
+            g2d.drawString(backpack.getEquipments().get(i).getName() + " " + backpack.getEquipments().get(i).GetDurability(),
                     30,
                     50 + i*15);
         }
 
         g2d.drawString("Materials", 150, 35);
-        g2d.drawString("Aminoacids: " + backpack.GetAminos().size(), 155, 50);
-        g2d.drawString("Nucleotide: " + backpack.GetNucleotide().size(), 155, 65);
+        g2d.drawString("Aminoacids: " + backpack.getAminos().size(), 155, 50);
+        g2d.drawString("Nucleotide: " + backpack.getNucleotide().size(), 155, 65);
 
         g2d.drawString("Players", 275, 35);
-        for (int i = 0; i < controller.GetVirologists().get(controller.GetIndex()).GetRoute().GetLocation().GetVirologists().size(); i++) {
-            g2d.drawString(controller.GetVirologists().get(controller.GetIndex()).GetRoute().GetLocation().GetVirologists().get(i).GetName(),
+        for (int i = 0; i < controller.getVirologists().get(controller.getIndex()).GetRoute().GetLocation().GetVirologists().size(); i++) {
+            g2d.drawString(controller.getVirologists().get(controller.getIndex()).GetRoute().GetLocation().GetVirologists().get(i).GetName(),
                     280,
                     50 + i*15);
         }

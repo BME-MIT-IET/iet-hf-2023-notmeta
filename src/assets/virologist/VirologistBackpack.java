@@ -39,7 +39,7 @@ public class VirologistBackpack extends Backpack{
 	private final ArrayList<Agent> appliedAgents;
 	/** A Virologist can store 3 Equipments in his Backpack*/
 	@Override
-	public boolean Add(Equipment e){
+	public boolean add(Equipment e){
 		if(equipments.size() < 3){
 			equipments.add(e);
 			return true;
@@ -50,7 +50,7 @@ public class VirologistBackpack extends Backpack{
 
 	/** A Virologist can sture a certain amount of Aminoacids in his Backpack*/
 	@Override
-	public boolean Add(Aminoacid a){
+	public boolean add(Aminoacid a){
 		if(aminoacids.size() < capacity){
 			aminoacids.add(a);
 			return true;
@@ -60,7 +60,7 @@ public class VirologistBackpack extends Backpack{
 
 	/** A Virologist can sture a certain amount of Nucleotide in his Backpack*/
 	@Override
-	public boolean Add(Nucleotide n){
+	public boolean add(Nucleotide n){
 		if(nucleotids.size() < capacity){
 			nucleotids.add(n);
 			return true;
@@ -69,7 +69,7 @@ public class VirologistBackpack extends Backpack{
 	}
 	/** Adds the created collectables.agent.Agent to the field.Backpack*/
 	@SuppressWarnings("SameReturnValue")
-	public boolean Add(Agent a) {
+	public boolean add(Agent a) {
 		agents.add(a);
 		return true;
 	}
