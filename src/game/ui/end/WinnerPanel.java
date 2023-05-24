@@ -4,7 +4,6 @@ import game.ui.SceneLauncher;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
 
 /**
  * JPanel that writes out the winners name
@@ -42,6 +41,6 @@ public class WinnerPanel extends JPanel {
         Font nicknameFont = new Font("Consolas", Font.BOLD, 40);
         g2d.setFont(nicknameFont);
         FontMetrics fontMetrics = g2d.getFontMetrics(g2d.getFont());
-        g2d.drawString(winner + " won!", SceneLauncher.Gamewidth/2-fontMetrics.stringWidth(winner+" won!")/2,150);
+        g2d.drawString(winner + " won!", SceneLauncher.GAME_WIDTH /2-fontMetrics.stringWidth(winner+" won!")/2,150);
     }
 }

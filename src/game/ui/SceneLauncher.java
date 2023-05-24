@@ -11,18 +11,18 @@ import java.util.ArrayList;
  */
 public class SceneLauncher {
 
-    public static final int Gamewidth = 800;
-    public static final int Gameheight = 600;
+    public static final int GAME_WIDTH = 800;
+    public static final int GAME_HEIGHT = 600;
     public ArrayList<String> players = new ArrayList<>();
     private String winner;
 
     /**
      * Main states for the game;
      */
-    public enum GLOBALGAMESTATES{
-        Menu,
-        Game,
-        End
+    public enum GLOBAL_GAME_STATES {
+        MENU,
+        GAME,
+        END
     }
 
     /**
@@ -34,17 +34,17 @@ public class SceneLauncher {
 
     /**
      * Function that responsible for changing the different states, and scenes for the game;
-     * @param globalgamestates the state that resembles the scene
+     * @param globalGameState the state that resembles the scene
      */
-    public void SwitchScenes(GLOBALGAMESTATES globalgamestates){
-        switch (globalgamestates){
-            case Menu:
+    public void switchScenes(GLOBAL_GAME_STATES globalGameState){
+        switch (globalGameState){
+            case MENU:
                 new MenuScene(this);
                 break;
-            case Game:
-                new GameScene(this,players);
+            case GAME:
+                new GameScene(this, players);
                 break;
-            case End:
+            case END:
                 new EndScene(this);
                 break;
         }
@@ -54,15 +54,15 @@ public class SceneLauncher {
      * Setter for players names
      * @param players array that holds the player's names
      */
-    public void SetPlayerNames(ArrayList<String> players){
+    public void setPlayerNames(ArrayList<String> players){
         this.players = players;
     }
 
-    public void SetWinner(String winner){
+    public void setWinner(String winner){
         this.winner = winner;
     }
-    //TODO
-    public String GetWinner(){
+
+    public String getWinner(){
         return winner;
     }
 }

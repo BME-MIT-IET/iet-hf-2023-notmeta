@@ -25,7 +25,7 @@ public class GameScene extends JFrame {
         this.setTitle("Game");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setSize(SceneLauncher.Gamewidth, SceneLauncher.Gameheight);
+        this.setSize(SceneLauncher.GAME_WIDTH, SceneLauncher.GAME_HEIGHT);
         this.setLocationRelativeTo(null);
         this.dmap = new ArrayList<>();
         this.dVirologists = new ArrayList<>();

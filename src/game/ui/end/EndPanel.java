@@ -26,7 +26,7 @@ public class EndPanel extends JPanel implements ActionListener {
      */
     public EndPanel(EndScene endScene, SceneLauncher sl, String winner){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(SceneLauncher.Gamewidth, SceneLauncher.Gameheight));
+        this.setPreferredSize(new Dimension(SceneLauncher.GAME_WIDTH, SceneLauncher.GAME_HEIGHT));
         this.setBackground(Color.white);
         this.endScene=endScene;
         this.sceneLauncher=sl;
@@ -56,7 +56,7 @@ public class EndPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == backToMenu){
-            sceneLauncher.SwitchScenes(SceneLauncher.GLOBALGAMESTATES.Menu);
+            sceneLauncher.switchScenes(SceneLauncher.GLOBAL_GAME_STATES.MENU);
             sceneLauncher.players.clear();
             endScene.dispose();
         }

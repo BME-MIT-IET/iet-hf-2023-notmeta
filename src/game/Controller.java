@@ -86,8 +86,8 @@ public class Controller implements java.io.Serializable {
     public void endTurn() {
         getCurrentVirologist().EndTurn();
         if (getCurrentVirologist().GetLearnedGenomes().size() == learnableGenomes.size()) {
-            sceneLauncher.SetWinner(getCurrentVirologist().GetName());
-            sceneLauncher.SwitchScenes(SceneLauncher.GLOBALGAMESTATES.End);
+            sceneLauncher.setWinner(getCurrentVirologist().GetName());
+            sceneLauncher.switchScenes(SceneLauncher.GLOBAL_GAME_STATES.END);
             System.out.printf("%s won the game!!!!\n", getCurrentVirologist().GetName());
         } else
             nextPlayer();
@@ -115,32 +115,36 @@ public class Controller implements java.io.Serializable {
         this.placeVirologists(fileName);
     }
 
+    private boolean startOfVirologistSection(String line) {
+        return line.equals("virologists:");
+    }
+
     public void importFields(String fileName) {
         try {
             FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            while (true) {
-                String line = br.readLine();
-                if (line == null || line.equals("") || line.equals("virologists:")) break;
-                String[] field = line.split(" ");
-                fieldCoords.add(new Point(Integer.parseInt(field[1]), Integer.parseInt(field[2])));
-                switch (field[3]) {
-                    case "laboratory":
-                    case "bearlaboratory":
-                        createLaboratory(field[3], field[4], field[0]);
-                        break;
-                    case "shelter":
-                        createShelter(field[3], field[4], field[0]);
-                        break;
-                    case "warehouse":
-                        createWarehouse(field[3], field[4], field[0]);
-                        break;
-                    default:
-                        createNormal(field[3], field[0]);
-                        break;
+            try (BufferedReader br = new BufferedReader(fr)) {
+                while (true) {
+                    String line = br.readLine();
+                    if (line == null || line.equals("") || startOfVirologistSection(line)) break;
+                    String[] field = line.split(" ");
+                    fieldCoords.add(new Point(Integer.parseInt(field[1]), Integer.parseInt(field[2])));
+                    switch (field[3]) {
+                        case "laboratory":
+                        case "bearlaboratory":
+                            createLaboratory(field[3], field[4], field[0]);
+                            break;
+                        case "shelter":
+                            createShelter(field[4], field[0]);
+                            break;
+                        case "warehouse":
+                            createWarehouse(field[4], field[0]);
+                            break;
+                        default:
+                            createNormal(field[0]);
+                            break;
+                    }
                 }
             }
-            br.close();
             fr.close();
         } catch (IOException e) {
         e.printStackTrace();
@@ -150,22 +154,22 @@ public class Controller implements java.io.Serializable {
     public void setFieldNeighbours(String fileName) {
         try {
             FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
+            try (BufferedReader br = new BufferedReader(fr)) {
+                String line = br.readLine();
+                while (line != null) {
 
-                if (line.equals("virologists:")) break;
-                String[] field = line.split(" ");
-                if (field[3].equals("normal")) {
-                    for (int i = 4; i < field.length; i++)
-                        searchFieldById(field[0]).SetNeighbour(searchFieldById(field[i]));
-                } else {
-                    for (int i = 5; i < field.length; i++)
-                        searchFieldById(field[0]).SetNeighbour(searchFieldById(field[i]));
+                    if (startOfVirologistSection(line)) break;
+                    String[] field = line.split(" ");
+                    if (field[3].equals("normal")) {
+                        for (int i = 4; i < field.length; i++)
+                            searchFieldById(field[0]).SetNeighbour(searchFieldById(field[i]));
+                    } else {
+                        for (int i = 5; i < field.length; i++)
+                            searchFieldById(field[0]).SetNeighbour(searchFieldById(field[i]));
+                    }
+                    line = br.readLine();
                 }
-                line = br.readLine();
             }
-            br.close();
             fr.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -175,22 +179,22 @@ public class Controller implements java.io.Serializable {
     public void placeVirologists(String fileName) {
         try {
             FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
-                line = br.readLine();
-                if(line.equals("virologists:")) break;
-            }
-            line = br.readLine();
-            while (line != null) {
-                String[] virologist = line.split(" ");
-                if (virologist.length == 2) {
-                    this.createVirologist(virologist[0], virologist[1]);
+            try (BufferedReader br = new BufferedReader(fr)) {
+                String line = br.readLine();
+                while (line != null) {
+                    line = br.readLine();
+                    if (startOfVirologistSection(line)) break;
                 }
-                if (line.equals("")) break;
                 line = br.readLine();
+                while (line != null) {
+                    String[] virologist = line.split(" ");
+                    if (virologist.length == 2) {
+                        this.createVirologist(virologist[0], virologist[1]);
+                    }
+                    if (line.equals("")) break;
+                    line = br.readLine();
+                }
             }
-            br.close();
             fr.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -269,13 +273,13 @@ public class Controller implements java.io.Serializable {
         map.add(f);
     }
 
-    public void createWarehouse(String type, String material, String fieldID) {
+    private void createWarehouse(String material, String fieldID) {
         Field f = new WareHouse();
-        if (material.equals("aminoacid")) {
+        if (material.equals(ProtoUI.AMINO_ACID)) {
             for (int i = 0; i < 20; i++)
                 f.getBackpack().add(new Aminoacid());
         }
-        if (material.equals("nucleotide")) {
+        if (material.equals(ProtoUI.NUCLEOTIDE)) {
             for (int i = 0; i < 20; i++)
                 f.getBackpack().add(new Nucleotide());
         }
@@ -283,7 +287,7 @@ public class Controller implements java.io.Serializable {
         map.add(f);
     }
 
-    public void createShelter(String type, String equipment, String fieldID) {
+    private void createShelter(String equipment, String fieldID) {
         Field f = new Shelter();
         for (int i = 0; i < 5; i++)
             f.getBackpack().add(stringToEquipment(equipment));
@@ -291,7 +295,7 @@ public class Controller implements java.io.Serializable {
         map.add(f);
     }
 
-    public void createNormal(String type, String fieldID) {
+    private void createNormal(String fieldID) {
         Field f = new Normal();
         f.SetFieldID(fieldID);
         map.add(f);
@@ -742,7 +746,6 @@ public class Controller implements java.io.Serializable {
             default:
                 g = null;
         }
-        ;
         return g;
     }
 
