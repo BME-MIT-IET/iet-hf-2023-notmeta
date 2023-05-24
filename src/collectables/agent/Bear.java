@@ -32,7 +32,7 @@ public class Bear extends Agent{
     }
 
     @Override
-    public String GetName() {
+    public String getName() {
         return "bear";
     }
 }

@@ -156,7 +156,7 @@ public class ActionPanel extends JPanel implements ActionListener {
      * This method updates the states of all button.
      */
     public void Update() {
-        State state = controller.getCurrentVirologist().GetState();
+        State state = controller.getCurrentVirologist().getState();
         switch (state) {
             case BEFORE_MOVE:
                 move.setEnabled(true);
@@ -238,9 +238,9 @@ public class ActionPanel extends JPanel implements ActionListener {
             controller.learnGenome();
             gameScene.repaint();
         } else if (e.getSource() == pickUp) {
-            ArrayList<Aminoacid> aminoList = controller.getCurrentField().GetBackpack().GetAminos();
-            ArrayList<Nucleotide> nucleoList = controller.getCurrentField().GetBackpack().GetNucleotide();
-            ArrayList<Equipment> equipmentList = controller.getCurrentField().GetBackpack().GetEquipments();
+            ArrayList<Aminoacid> aminoList = controller.getCurrentField().getBackpack().getAminos();
+            ArrayList<Nucleotide> nucleoList = controller.getCurrentField().getBackpack().getNucleotide();
+            ArrayList<Equipment> equipmentList = controller.getCurrentField().getBackpack().getEquipments();
             String[] names = {"Aminoacid", "Nucleotide", "Equipment"};
             int x = JOptionPane.showOptionDialog(null, "Choose what you want to pick up!",
                     "Choose",
@@ -283,7 +283,7 @@ public class ActionPanel extends JPanel implements ActionListener {
                 case 2:
                     ArrayList<String> list = new ArrayList<>();
                     for (Equipment eq : equipmentList) {
-                        list.add(eq.GetName());
+                        list.add(eq.getName());
                     }
                     Object[] equipments = list.toArray();
                     if (equipments.length != 0) {
@@ -298,9 +298,9 @@ public class ActionPanel extends JPanel implements ActionListener {
             }
             gameScene.repaint();
         } else if (e.getSource() == drop) {
-            ArrayList<Aminoacid> aminoList = controller.getCurrentVirologist().GetBackpack().GetAminos();
-            ArrayList<Nucleotide> nucleoList = controller.getCurrentVirologist().GetBackpack().GetNucleotide();
-            ArrayList<Equipment> equipmentList = controller.getCurrentVirologist().GetBackpack().GetEquipments();
+            ArrayList<Aminoacid> aminoList = controller.getCurrentVirologist().getBackpack().getAminos();
+            ArrayList<Nucleotide> nucleoList = controller.getCurrentVirologist().getBackpack().getNucleotide();
+            ArrayList<Equipment> equipmentList = controller.getCurrentVirologist().getBackpack().getEquipments();
             String[] names = {"Aminoacid", "Nucleotide", "Equipment"};
             int x = JOptionPane.showOptionDialog(null, "Choose what you want to drop!",
                     "Choose",
@@ -332,7 +332,7 @@ public class ActionPanel extends JPanel implements ActionListener {
                 case 2:
                     ArrayList<String> list = new ArrayList<>();
                     for (Equipment eq : equipmentList) {
-                        list.add(eq.GetName());
+                        list.add(eq.getName());
                     }
                     Object[] equipments = list.toArray();
                     int index = JOptionPane.showOptionDialog(null, "Choose what you want to drop!",
@@ -362,12 +362,12 @@ public class ActionPanel extends JPanel implements ActionListener {
         } else if (e.getSource() == infect) {
             if (mapPanel.getActiveVirologist() == null)
                 JOptionPane.showMessageDialog(null, "Select a virologist to infect!");
-            else if (controller.getCurrentVirologist().GetBackpack().GetAgents().isEmpty())
+            else if (controller.getCurrentVirologist().getBackpack().GetAgents().isEmpty())
                 JOptionPane.showMessageDialog(null, "You have no agents.");
             else {
                 ArrayList<String> list = new ArrayList<>();
-                for (Agent a : controller.getCurrentVirologist().GetBackpack().GetAgents()) {
-                    String create = a.GetName() + " warranty:" + a.getWarranty();
+                for (Agent a : controller.getCurrentVirologist().getBackpack().GetAgents()) {
+                    String create = a.getName() + " warranty:" + a.getWarranty();
                     list.add(create);
                 }
                 Object[] options = list.toArray();
@@ -381,9 +381,9 @@ public class ActionPanel extends JPanel implements ActionListener {
             if (mapPanel.getActiveVirologist() == null)
                 JOptionPane.showMessageDialog(null, "Select a virologist to steal from!");
             else {
-                ArrayList<Aminoacid> aminoList = controller.getVirologist(mapPanel.getActiveVirologist().GetVirologistName()).GetBackpack().GetAminos();
-                ArrayList<Nucleotide> nucleoList = controller.getVirologist(mapPanel.getActiveVirologist().GetVirologistName()).GetBackpack().GetNucleotide();
-                ArrayList<Equipment> equipmentList = controller.getVirologist(mapPanel.getActiveVirologist().GetVirologistName()).GetBackpack().GetEquipments();
+                ArrayList<Aminoacid> aminoList = controller.getVirologist(mapPanel.getActiveVirologist().GetVirologistName()).getBackpack().getAminos();
+                ArrayList<Nucleotide> nucleoList = controller.getVirologist(mapPanel.getActiveVirologist().GetVirologistName()).getBackpack().getNucleotide();
+                ArrayList<Equipment> equipmentList = controller.getVirologist(mapPanel.getActiveVirologist().GetVirologistName()).getBackpack().getEquipments();
                 String[] names = {"Aminoacid", "Nucleotide", "Equipment"};
                 int x = JOptionPane.showOptionDialog(null, "Choose what you want to steal!",
                         "Choose",
@@ -415,7 +415,7 @@ public class ActionPanel extends JPanel implements ActionListener {
                     case 2:
                         ArrayList<String> list = new ArrayList<>();
                         for (Equipment eq : equipmentList) {
-                            list.add(eq.GetName());
+                            list.add(eq.getName());
                         }
                         Object[] equipments = list.toArray();
                         int index = JOptionPane.showOptionDialog(null, "Choose what you want to steal!",

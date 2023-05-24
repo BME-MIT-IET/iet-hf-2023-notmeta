@@ -30,7 +30,7 @@ public class NotEnoughNucleotide {
     @When("virologist tries to create new agent")
     public void virologist_tries_to_create_new_agent() {
         Virologist virologist = controller.getCurrentVirologist();
-        backpack = virologist.GetBackpack();
+        backpack = virologist.getBackpack();
 
         assertEquals(1, virologist.GetLearnedGenomes().size());
         assertEquals(agentType, virologist.GetLearnedGenomes().get(0).GetName());

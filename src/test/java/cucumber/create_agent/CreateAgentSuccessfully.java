@@ -31,7 +31,7 @@ public class CreateAgentSuccessfully {
     @When("virologist tries to create agent")
     public void virologist_tries_to_create_agent() {
         Virologist virologist = controller.getCurrentVirologist();
-        backpack = virologist.GetBackpack();
+        backpack = virologist.getBackpack();
 
         assertEquals(1, virologist.GetLearnedGenomes().size());
         assertEquals(agentType, virologist.GetLearnedGenomes().get(0).GetName());
@@ -44,6 +44,6 @@ public class CreateAgentSuccessfully {
     @Then("virologist receives an agent")
     public void virologist_receives_an_agent() {
         assertEquals(1, backpack.GetAgents().size());
-        assertEquals(agentType, backpack.GetAgents().get(0).GetName());
+        assertEquals(agentType, backpack.GetAgents().get(0).getName());
     }
 }

@@ -76,10 +76,6 @@ public abstract class Field implements java.io.Serializable{
 		neighbours.add(f);
 	}
 
-	public void SetFieldId(String fieldID){
-		this.fieldID = fieldID;
-	}
-
 	/** Returns the direction a field.virologist.Virologist can move from this field.field.Field*/
 	public ArrayList<Integer> GetDirections() {
 		ArrayList<Integer> directions = new ArrayList<>();
@@ -89,7 +85,7 @@ public abstract class Field implements java.io.Serializable{
 		return directions;
 	}
 
-	public Backpack GetBackpack() {
+	public Backpack getBackpack() {
 		return backpack;
 	}
 

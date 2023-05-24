@@ -35,7 +35,7 @@ public class Gloves extends Equipment{
 	}
 
 	@Override
-	public String GetName() {
+	public String getName() {
 		return "gloves";
 	}
 }

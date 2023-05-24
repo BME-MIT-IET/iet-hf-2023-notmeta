@@ -426,13 +426,13 @@ public class ProtoUI {
 
 
     private static void showBackpack(Backpack backpack, PrintWriter pw) {
-        pw.printf("aminoacid: %d\nnucleotide: %d\nequipments:\n", backpack.GetAminos().size(), backpack.GetNucleotide().size());
+        pw.printf("aminoacid: %d\nnucleotide: %d\nequipments:\n", backpack.getAminos().size(), backpack.getNucleotide().size());
         int index = 1;
-        for(Equipment e : backpack.GetEquipments()){
+        for(Equipment e : backpack.getEquipments()){
             if(e.GetDurability() < 0)
-                pw.printf("%d. %s\n", index, e.GetName());
+                pw.printf("%d. %s\n", index, e.getName());
             else
-                pw.printf("%d. %s %d\n", index, e.GetName(), e.GetDurability());
+                pw.printf("%d. %s %d\n", index, e.getName(), e.GetDurability());
             index++;
         }
     }
@@ -465,8 +465,8 @@ public class ProtoUI {
      * @param pw the output will be written there
      */
     private static void showCreatable(Virologist virologist, PrintWriter pw) {
-        int aminoCount = virologist.GetBackpack().GetAminos().size();
-        int nucleoCount = virologist.GetBackpack().GetNucleotide().size();
+        int aminoCount = virologist.getBackpack().getAminos().size();
+        int nucleoCount = virologist.getBackpack().getNucleotide().size();
         pw.printf("you have: \t%d aminoacid \t%d nucleotide\n", aminoCount, nucleoCount);
         for(Genome g : virologist.GetLearnedGenomes()){
             pw.printf("%s \t%d aminoacid \t%d nucleotide\n",g.GetName() ,g.getAminoCost(), g.getNucleoCost());
@@ -480,8 +480,8 @@ public class ProtoUI {
      */
     private static void showAgents(Virologist virologist, PrintWriter pw) {
         int index = 1;
-        for(Agent a : virologist.GetBackpack().GetAgents()){
-            pw.printf("%d. %s %d\n", index, a.GetName(), a.getWarranty());
+        for(Agent a : virologist.getBackpack().GetAgents()){
+            pw.printf("%d. %s %d\n", index, a.getName(), a.getWarranty());
             index++;
         }
     }
@@ -492,7 +492,7 @@ public class ProtoUI {
      * @param pw the output will be written there
      */
     private static void showFieldBackpack(Field field, PrintWriter pw) {
-        Backpack backpack = field.GetBackpack();
+        Backpack backpack = field.getBackpack();
         pw.printf("materials:\n");
         showBackpack(backpack, pw);
     }
@@ -503,7 +503,7 @@ public class ProtoUI {
      * @param pw the output will be written there
      */
     private static void showVirologistBackpack(Virologist virologist, PrintWriter pw) {
-        VirologistBackpack backpack = virologist.GetBackpack();
+        VirologistBackpack backpack = virologist.getBackpack();
         showBackpack(backpack, pw);
     }
 
@@ -546,7 +546,7 @@ public class ProtoUI {
     private static void showVirologist(Virologist virologist, PrintWriter pw) {
         pw.printf("name: %s\nfield: %s\n", virologist.GetName(), virologist.GetRoute().GetLocation().getFieldID());
         String state = "";
-        switch (virologist.GetState()){
+        switch (virologist.getState()){
             case KILLED:
                 state = "killed";
                 break;
@@ -566,22 +566,22 @@ public class ProtoUI {
         for(Genome g :virologist.GetLearnedGenomes()){
             pw.printf("-%s\n", g.GetName());
         }
-        VirologistBackpack backpack = virologist.GetBackpack();
+        VirologistBackpack backpack = virologist.getBackpack();
         pw.printf("backpack:\ncapacity: %d\n", backpack.GetCapacity());
         showBackpack(backpack, pw);
 
         pw.printf("agents:\n");
         int aIndex = 1;
         for(Agent a : backpack.GetAgents()){
-            pw.printf("%d. %s %d\n", aIndex, a.GetName(), a.getWarranty());
+            pw.printf("%d. %s %d\n", aIndex, a.getName(), a.getWarranty());
             aIndex++;
         }
         pw.printf("applied agents:\n");
         for(Agent a : backpack.GetAppliedAgents()){
             if(a.getDuration() != -1)
-                pw.printf("-%s %d\n", a.GetName(), a.getDuration());
+                pw.printf("-%s %d\n", a.getName(), a.getDuration());
             else
-                pw.printf("-%s\n", a.GetName());
+                pw.printf("-%s\n", a.getName());
         }
     }
 

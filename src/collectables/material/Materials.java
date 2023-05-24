@@ -26,5 +26,5 @@ public abstract class Materials implements Collectable , java.io.Serializable{
     public void Remove(Virologist v) {
     }
 
-    public abstract String GetName();
+    public abstract String getName();
 }

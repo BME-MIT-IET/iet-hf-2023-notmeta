@@ -28,7 +28,7 @@ public class GetInfected implements GetInfectedBehavior, java.io.Serializable{
     @Override
     public void getInfected(Virologist v1, Virologist v2, Agent a) {
         a.Apply(v2);
-        v2.GetBackpack().AddApplied(a);
+        v2.getBackpack().AddApplied(a);
     }
 
     @Override

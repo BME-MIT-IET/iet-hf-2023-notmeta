@@ -56,22 +56,22 @@ public class BackpackPanel extends JPanel {
         g2d.draw(new Line2D.Float(0,0,800,0));
         g2d.drawString(controller.getVirologists().get(controller.getIndex()).GetName()+"'s backpack", 25, 20);
 
-        VirologistBackpack backpack = controller.getVirologists().get(controller.getIndex()).GetBackpack();
+        VirologistBackpack backpack = controller.getVirologists().get(controller.getIndex()).getBackpack();
         int linegap = 0;
-        for (int i = 0; i < backpack.GetEquipments().size(); i++) {
-            g2d.drawString(backpack.GetEquipments().get(i).GetName() + " " + backpack.GetEquipments().get(i).GetDurability(),
+        for (int i = 0; i < backpack.getEquipments().size(); i++) {
+            g2d.drawString(backpack.getEquipments().get(i).getName() + " " + backpack.getEquipments().get(i).GetDurability(),
                     30,
                     40 + linegap*15);
             linegap++;
         }
-        g2d.drawString("Aminoacids: " + backpack.GetAminos().size(), 30, 40 + linegap*15);
+        g2d.drawString("Aminoacids: " + backpack.getAminos().size(), 30, 40 + linegap*15);
         linegap++;
 
-        g2d.drawString("Nucleotide: " + backpack.GetNucleotide().size(), 30, 40 + linegap*15);
+        g2d.drawString("Nucleotide: " + backpack.getNucleotide().size(), 30, 40 + linegap*15);
         linegap++;
 
         for (int i = 0; i < backpack.GetAgents().size(); i++) {
-            g2d.drawString(backpack.GetAgents().get(i).GetName() + " " +backpack.GetAgents().get(i).getWarranty(),
+            g2d.drawString(backpack.GetAgents().get(i).getName() + " " +backpack.GetAgents().get(i).getWarranty(),
                     30,
                     40 + linegap*15);
             linegap++;
@@ -82,7 +82,7 @@ public class BackpackPanel extends JPanel {
 
         if(!(backpack.GetAppliedAgents().isEmpty())){
             for (int i=0; i<backpack.GetAppliedAgents().size(); i++){
-                g2d.drawString(backpack.GetAppliedAgents().get(i).GetName()+": "
+                g2d.drawString(backpack.GetAppliedAgents().get(i).getName()+": "
                         +backpack.GetAppliedAgents().get(i).getDuration()
                         +" turns left",
                         30, 265+i*15);

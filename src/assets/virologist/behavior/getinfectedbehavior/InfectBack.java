@@ -35,7 +35,7 @@ public class InfectBack implements GetInfectedBehavior, java.io.Serializable{
         v1.GetInfected(v2, a);
         glove.DecreaseEquipmentDurability();
         if(glove.GetDurability() == 0)
-            glove.RemoveFromBackpack(v2, v2.GetBackpack());
+            glove.RemoveFromBackpack(v2, v2.getBackpack());
     }
 
     @Override

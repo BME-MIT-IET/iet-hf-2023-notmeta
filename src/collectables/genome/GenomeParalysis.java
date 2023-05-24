@@ -21,7 +21,7 @@ public class GenomeParalysis extends Genome{
 	 */
 	public void CreateAgent(Virologist v) {
 		Paralysis agent = new Paralysis();
-		agent.AddToBackpack(v, v.GetBackpack());
+		agent.AddToBackpack(v, v.getBackpack());
 	}
 	@Override
 	public int getAminoCost() {

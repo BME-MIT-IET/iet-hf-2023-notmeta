@@ -30,7 +30,7 @@ public class NotEnoughAminoacid {
     @When("virologist tries to create some agent")
     public void virologist_tries_to_create_some_agent() {
         Virologist virologist = controller.getCurrentVirologist();
-        backpack = virologist.GetBackpack();
+        backpack = virologist.getBackpack();
 
         assertEquals(1, virologist.GetLearnedGenomes().size());
         assertEquals(agentType, virologist.GetLearnedGenomes().get(0).GetName());
