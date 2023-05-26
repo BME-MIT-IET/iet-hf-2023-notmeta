@@ -1,4 +1,3 @@
-
 repositories {
     mavenCentral()
 }
@@ -29,7 +28,6 @@ application {
     mainClass.set("Main")
 }
 
-
 sourceSets {
     main {
         java {
@@ -39,7 +37,10 @@ sourceSets {
     test {
         java {
             srcDir("src/test")
-            exclude("**ui**")
+            exclude("**/ui/**") // Adjusted exclusion pattern
+        }
+        resources {
+            srcDir("src/test/resources")
         }
     }
 }
