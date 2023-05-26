@@ -1,4 +1,4 @@
-package java.ui.game;
+package ui.game;
 
 import game.ui.SceneLauncher;
 import game.ui.game.GameScene;
@@ -6,8 +6,8 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import java.ui.util.PlayerNames;
-import java.ui.util.TestComponentNames;
+import ui.util.PlayerNames;
+import ui.util.TestComponentNames;
 
 import java.util.ArrayList;
 

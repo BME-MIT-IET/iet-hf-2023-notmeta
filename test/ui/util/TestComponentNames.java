@@ -1,4 +1,4 @@
-package java.ui.util;
+package ui.util;
 
 public class TestComponentNames {
    public static final String START_GAME = "startGame";
