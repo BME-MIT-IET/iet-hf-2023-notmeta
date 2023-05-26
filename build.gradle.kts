@@ -12,7 +12,7 @@ plugins {
 tasks.test {
     useJUnitPlatform()
     filter {
-        includeTestsMatching("**cucumber**")
+        excludeTestsMatching("ui.*")
     }
 }
 
@@ -40,7 +40,6 @@ sourceSets {
     test {
         java {
             srcDir("test")
-            exclude("**ui**")
         }
     }
 }
@@ -59,15 +58,9 @@ tasks.withType<Jar>{
     }
 }
 
-tasks.create<Test>("Run Ui Test") {
+tasks.create<Test>("runUiTests") {
     filter {
         includeTestsMatching("ui.*")
-    }
-}
-
-tasks.create<Test>("Run Cucumber Test") {
-    filter {
-        includeTestsMatching("cucumber.*")
     }
 }
 
