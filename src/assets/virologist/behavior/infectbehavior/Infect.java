@@ -23,14 +23,14 @@ public class Infect implements InfectBehavior, java.io.Serializable {
 
     @Override
     public void InfectVirologist(Virologist v1, Virologist v2, Agent a) {
-        v1.GetBackpack().Remove(a);
+        v1.getBackpack().Remove(a);
         v2.GetInfected(v1, a);
         v1.SetState(State.AFTER_ACTION);
     }
 
     @Override
     public void InfectRandomOff(Virologist v1, Virologist v2, Agent a) {
-        v1.GetBackpack().Remove(a);
+        v1.getBackpack().Remove(a);
         v2.GetInfectedRandomOff(v1, a);
         v1.SetState(State.AFTER_ACTION);
     }

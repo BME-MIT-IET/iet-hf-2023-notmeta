@@ -24,7 +24,7 @@ public class GenomeOblivion extends Genome{
 	 */
 	public void CreateAgent(Virologist v) {
 		Oblivion agent = new Oblivion();
-		agent.AddToBackpack(v, v.GetBackpack());
+		agent.AddToBackpack(v, v.getBackpack());
 	}
 	@Override
 	public int getAminoCost() {

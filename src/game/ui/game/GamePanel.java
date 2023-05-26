@@ -2,7 +2,6 @@ package game.ui.game;
 
 import game.Controller;
 import game.ui.SceneLauncher;
-import game.ui.game.map.DVirologist;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,11 +27,11 @@ public class GamePanel extends JPanel {
         this.players = players;
         sceneLauncher = sl;
         this.gameScene = gameScene;
-        this.setPreferredSize(new Dimension(SceneLauncher.Gamewidth, SceneLauncher.Gameheight));
+        this.setPreferredSize(new Dimension(SceneLauncher.GAME_WIDTH, SceneLauncher.GAME_HEIGHT));
         this.setBackground(Color.white);
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        mapPanel = new MapPanel(gameScene, sceneLauncher, players);
+        mapPanel = new MapPanel(gameScene);
         backpackPanel = new BackpackPanel(gameScene, sceneLauncher, players, controller);
         fieldPanel = new FieldPanel(gameScene, sceneLauncher, players, controller);
         actionPanel = new ActionPanel(gameScene, sceneLauncher, players, controller, backpackPanel, mapPanel);

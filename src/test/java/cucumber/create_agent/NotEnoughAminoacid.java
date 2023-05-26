@@ -20,24 +20,24 @@ public class NotEnoughAminoacid {
     @Given("virologist learned some genome, not enough aminoacid")
     public void virologist_learned_some_genome_not_enough_aminoacid() {
         controller = new Controller();
-        controller.CreateField(fieldType, startFieldId);
-        controller.CreateVirologist(virologistId, startFieldId);
-        controller.GiveNucleotideToVirologist(5, virologistId);
-        controller.TeachGenome(agentType, virologistId);
-        controller.Start();
+        controller.createField(fieldType, startFieldId);
+        controller.createVirologist(virologistId, startFieldId);
+        controller.giveNucleotideToVirologist(5, virologistId);
+        controller.teachGenome(agentType, virologistId);
+        controller.start();
     }
 
     @When("virologist tries to create some agent")
     public void virologist_tries_to_create_some_agent() {
-        Virologist virologist = controller.GetCurrentVirologist();
-        backpack = virologist.GetBackpack();
+        Virologist virologist = controller.getCurrentVirologist();
+        backpack = virologist.getBackpack();
 
         assertEquals(1, virologist.GetLearnedGenomes().size());
         assertEquals(agentType, virologist.GetLearnedGenomes().get(0).GetName());
         assertEquals(0, backpack.GetAgents().size());
 
-        controller.MoveVirologist(0);
-        controller.CreateAgent(agentType);
+        controller.moveVirologist(0);
+        controller.createAgent(agentType);
     }
 
     @Then("virologist receives no agent")

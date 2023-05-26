@@ -22,7 +22,7 @@ public class Aminoacid extends Materials{
      */
     @Override
     public boolean AddToBackpack(Virologist v, Backpack b) {
-        return b.Add(this);
+        return b.add(this);
     }
 
     /**
@@ -37,5 +37,5 @@ public class Aminoacid extends Materials{
     }
 
     @Override
-    public String GetName(){ return "Aminoacid";}
+    public String getName(){ return "Aminoacid";}
 }

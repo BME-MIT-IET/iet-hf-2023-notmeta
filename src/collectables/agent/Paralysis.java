@@ -72,5 +72,5 @@ public class Paralysis extends Agent{
 	}
 
 	@Override
-	public String GetName(){ return "paralysis";}
+	public String getName(){ return "paralysis";}
 }

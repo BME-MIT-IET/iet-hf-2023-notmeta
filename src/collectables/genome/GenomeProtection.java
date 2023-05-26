@@ -22,7 +22,7 @@ public class GenomeProtection extends Genome{
 	 */
 	public void CreateAgent(Virologist v) {
 		Protection agent = new Protection();
-		agent.AddToBackpack(v, v.GetBackpack());
+		agent.AddToBackpack(v, v.getBackpack());
 	}
 	@Override
 	public int getAminoCost() {

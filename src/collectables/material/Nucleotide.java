@@ -21,7 +21,7 @@ public class Nucleotide extends Materials {
      */
     @Override
     public boolean AddToBackpack(Virologist v, Backpack b) {
-        return b.Add(this);
+        return b.add(this);
     }
 
     /**
@@ -36,5 +36,5 @@ public class Nucleotide extends Materials {
     }
 
     @Override
-    public String GetName(){ return "Nucleotide";}
+    public String getName(){ return "Nucleotide";}
 }

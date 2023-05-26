@@ -58,5 +58,5 @@ public class Chorea extends Agent{
 	}
 
 	@Override
-	public String GetName(){ return "chorea";}
+	public String getName(){ return "chorea";}
 }

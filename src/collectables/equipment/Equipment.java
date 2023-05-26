@@ -43,7 +43,7 @@ public abstract class Equipment implements Collectable , java.io.Serializable{
 	 */
 	@Override
 	public boolean AddToBackpack(Virologist v, Backpack b) {
-		return b.Add(this);
+		return b.add(this);
 	}
 
 	/**
@@ -55,5 +55,5 @@ public abstract class Equipment implements Collectable , java.io.Serializable{
 	public void RemoveFromBackpack(Virologist v, Backpack b) {
 		b.Remove(this);
 	}
-	public abstract String GetName();
+	public abstract String getName();
 }

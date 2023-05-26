@@ -21,7 +21,7 @@ public abstract class InGameButton extends JButton {
     public Point GetCoords(){
         return new Point(x,y);
     }
-    public String GetID(){
+    public String getId(){
         return drawableID;
     }
     public void setActivateStatus(boolean s) { activeStatus = s; }

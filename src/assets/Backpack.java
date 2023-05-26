@@ -30,32 +30,32 @@ public class Backpack implements java.io.Serializable{
 	protected final ArrayList<Equipment> equipments;
 
 	/** The Backpack can always store the Equipment*/
-	public boolean Add(Equipment e) {
+	public boolean add(Equipment e) {
 		equipments.add(e);
 		return true;
 	}
 
 
 	/** The Backpack can always store the Aminoacid*/
-	public boolean Add(Aminoacid a) {
+	public boolean add(Aminoacid a) {
 		aminoacids.add(a);
 		return true;
 	}
 	/** The Backpack can always store the Nucleotide*/
-	public boolean Add(Nucleotide n) {
+	public boolean add(Nucleotide n) {
 		nucleotids.add(n);
 		return true;
 	}
 
-	public ArrayList<Equipment> GetEquipments() {
+	public ArrayList<Equipment> getEquipments() {
 		return equipments;
 	}
 
-	public ArrayList<Aminoacid> GetAminos() {
+	public ArrayList<Aminoacid> getAminos() {
 		return  aminoacids;
 	}
 
-	public ArrayList<Nucleotide> GetNucleotide() {
+	public ArrayList<Nucleotide> getNucleotide() {
 		return nucleotids;
 	}
 

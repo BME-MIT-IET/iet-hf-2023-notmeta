@@ -20,23 +20,23 @@ public class MoveRandomly {
     @Given("virologist is on a field and is effected by chorea")
     public void virologist_is_on_a_field_and_is_effected_by_chorea() {
         controller = new Controller();
-        controller.CreateField(fieldType, startFieldId);
-        controller.CreateField(fieldType, endFieldId);
-        controller.NeighborFields(startFieldId, endFieldId);
-        controller.CreateVirologist(virologistId, startFieldId);
-        controller.EffectVirologist(effectType, virologistId);
-        controller.Start();
+        controller.createField(fieldType, startFieldId);
+        controller.createField(fieldType, endFieldId);
+        controller.neighborFields(startFieldId, endFieldId);
+        controller.createVirologist(virologistId, startFieldId);
+        controller.effectVirologist(effectType, virologistId);
+        controller.start();
     }
 
     @When("virologist uses move")
     public void virologist_uses_move() {
-        assertEquals(startFieldId, controller.GetCurrentField().GetFieldID());
-        assertThat(controller.GetCurrentVirologist().GetMoveBehavior(), instanceOf(RandomMove.class));
-        controller.MoveVirologistRandomOff(0);
+        assertEquals(startFieldId, controller.getCurrentField().getFieldID());
+        assertThat(controller.getCurrentVirologist().GetMoveBehavior(), instanceOf(RandomMove.class));
+        controller.moveVirologistRandomOff(0);
     }
 
     @Then("virologist moves randomly")
     public void virologist_moves_randomly() {
-        assertEquals(endFieldId, controller.GetCurrentField().GetFieldID());
+        assertEquals(endFieldId, controller.getCurrentField().getFieldID());
     }
 }

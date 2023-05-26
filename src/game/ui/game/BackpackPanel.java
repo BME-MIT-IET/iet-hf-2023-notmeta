@@ -1,24 +1,13 @@
 package game.ui.game;
 
 import assets.virologist.VirologistBackpack;
-import assets.virologist.behavior.movebehavior.BearMove;
-import assets.virologist.behavior.movebehavior.Move;
-import assets.virologist.behavior.movebehavior.NotMove;
-import assets.virologist.behavior.movebehavior.RandomMove;
-import collectables.equipment.Axe;
-import collectables.equipment.Cloak;
-import collectables.equipment.Equipment;
-import collectables.equipment.Gloves;
-import collectables.material.Aminoacid;
 import game.Controller;
 import game.ui.SceneLauncher;
-import game.ui.game.map.DVirologist;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *Panel which prints out the content of the virologist's backpack and the effects whitch affects him
@@ -65,24 +54,24 @@ public class BackpackPanel extends JPanel {
         FontMetrics fontMetrics = g2d.getFontMetrics(g2d.getFont());
         g2d.setStroke(new BasicStroke(5));
         g2d.draw(new Line2D.Float(0,0,800,0));
-        g2d.drawString(controller.GetVirologists().get(controller.GetIndex()).GetName()+"'s backpack", 25, 20);
+        g2d.drawString(controller.getVirologists().get(controller.getIndex()).GetName()+"'s backpack", 25, 20);
 
-        VirologistBackpack backpack = controller.GetVirologists().get(controller.GetIndex()).GetBackpack();
+        VirologistBackpack backpack = controller.getVirologists().get(controller.getIndex()).getBackpack();
         int linegap = 0;
-        for (int i = 0; i < backpack.GetEquipments().size(); i++) {
-            g2d.drawString(backpack.GetEquipments().get(i).GetName() + " " + backpack.GetEquipments().get(i).GetDurability(),
+        for (int i = 0; i < backpack.getEquipments().size(); i++) {
+            g2d.drawString(backpack.getEquipments().get(i).getName() + " " + backpack.getEquipments().get(i).GetDurability(),
                     30,
                     40 + linegap*15);
             linegap++;
         }
-        g2d.drawString("Aminoacids: " + backpack.GetAminos().size(), 30, 40 + linegap*15);
+        g2d.drawString("Aminoacids: " + backpack.getAminos().size(), 30, 40 + linegap*15);
         linegap++;
 
-        g2d.drawString("Nucleotide: " + backpack.GetNucleotide().size(), 30, 40 + linegap*15);
+        g2d.drawString("Nucleotide: " + backpack.getNucleotide().size(), 30, 40 + linegap*15);
         linegap++;
 
         for (int i = 0; i < backpack.GetAgents().size(); i++) {
-            g2d.drawString(backpack.GetAgents().get(i).GetName() + " " +backpack.GetAgents().get(i).getWarranty(),
+            g2d.drawString(backpack.GetAgents().get(i).getName() + " " +backpack.GetAgents().get(i).getWarranty(),
                     30,
                     40 + linegap*15);
             linegap++;
@@ -93,7 +82,7 @@ public class BackpackPanel extends JPanel {
 
         if(!(backpack.GetAppliedAgents().isEmpty())){
             for (int i=0; i<backpack.GetAppliedAgents().size(); i++){
-                g2d.drawString(backpack.GetAppliedAgents().get(i).GetName()+": "
+                g2d.drawString(backpack.GetAppliedAgents().get(i).getName()+": "
                         +backpack.GetAppliedAgents().get(i).getDuration()
                         +" turns left",
                         30, 265+i*15);

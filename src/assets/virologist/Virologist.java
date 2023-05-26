@@ -78,7 +78,7 @@ public class Virologist implements java.io.Serializable{
 
 	private KillBehavior killBehavior;
 
-	public VirologistBackpack GetBackpack(){
+	public VirologistBackpack getBackpack(){
 		return backPack;
 	}
 	/** If the field.virologist.Virologist didn't move yet in his turn he calls his MoveBehavior*/
@@ -123,7 +123,7 @@ public class Virologist implements java.io.Serializable{
 		if(state == State.NOT_IN_TURN){
 			Field f = GetRoute().GetLocation();
 			for(Collectable collectable: c){
-				collectable.RemoveFromBackpack(this, GetBackpack());
+				collectable.RemoveFromBackpack(this, getBackpack());
 				collectable.Remove(this);
 				f.Add(this, collectable);
 			}
@@ -182,7 +182,7 @@ public class Virologist implements java.io.Serializable{
 		}
 	}
 
-	public void KillVirologist(Virologist v){
+	public void killVirologist(Virologist v){
 		if(state == State.BEFORE_ACTION){
 			killBehavior.KillVirologist(this,v);
 		}
@@ -199,7 +199,7 @@ public class Virologist implements java.io.Serializable{
 	/** Sets all the effects to default. Then applies the effects of all collectables.equipment.Equipment and applies collectables.agent.Agent*/
 	public void RefreshEffects() {
 		DefaultBehaviors();
-		ArrayList<Equipment> eqs = backPack.GetEquipments();
+		ArrayList<Equipment> eqs = backPack.getEquipments();
 		for(Equipment e : eqs){
 			e.Apply(this);
 		}
@@ -252,7 +252,7 @@ public class Virologist implements java.io.Serializable{
 	}
 	
 	/** */
-	public State GetState() {
+	public State getState() {
 		return state;
 	}
 	

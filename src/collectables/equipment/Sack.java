@@ -26,17 +26,17 @@ public class Sack extends Equipment{
 	//TODO
 	/** Applies the Effect to the field.virologist.Virologist*/
 	public void Apply(Virologist v) {
-		v.GetBackpack().increaseCapacity(extraInventory);
+		v.getBackpack().increaseCapacity(extraInventory);
 	}
 
 	//TODO
 	/** Removes the effect From the field.virologist.Virologist*/
 	public void Remove(Virologist v) {
-		v.GetBackpack().decreaseCapacity(extraInventory);
+		v.getBackpack().decreaseCapacity(extraInventory);
 	}
 
 	@Override
-	public String GetName() {
+	public String getName() {
 		return "sack";
 	}
 

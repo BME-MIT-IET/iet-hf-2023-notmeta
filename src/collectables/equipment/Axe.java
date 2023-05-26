@@ -20,7 +20,7 @@ public class Axe extends Equipment{
     }
 
     @Override
-    public String GetName() {
+    public String getName() {
         return "axe";
     }
 }

@@ -1,6 +1,5 @@
 package game.ui.menu;
 
-import assets.virologist.Virologist;
 import game.ui.SceneLauncher;
 import game.ui.StyledMenuButtonUI;
 
@@ -35,7 +34,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         sceneLauncher = sl;
         this.menuScene = menuScene;
 
-        this.setPreferredSize(new Dimension(SceneLauncher.Gamewidth, SceneLauncher.Gameheight));
+        this.setPreferredSize(new Dimension(SceneLauncher.GAME_WIDTH, SceneLauncher.GAME_HEIGHT));
         this.setBackground(Color.white);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -100,8 +99,8 @@ public class MenuPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == StartGame) {
             if(playernames.size() > 0){
-                sceneLauncher.SetPlayerNames(playernames);
-                sceneLauncher.SwitchScenes(SceneLauncher.GLOBALGAMESTATES.Game);
+                sceneLauncher.setPlayerNames(playernames);
+                sceneLauncher.switchScenes(SceneLauncher.GLOBAL_GAME_STATES.GAME);
                 menuScene.dispose();
                 playernames.clear();
             }

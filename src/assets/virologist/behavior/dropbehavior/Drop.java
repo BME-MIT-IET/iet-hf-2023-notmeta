@@ -26,7 +26,7 @@ public class Drop implements DropBehavior, java.io.Serializable{
     public void DropCollectable(Virologist v, ArrayList<Collectable> c) {
         Field f = v.GetRoute().GetLocation();
         for(Collectable collectable: c){
-            collectable.RemoveFromBackpack(v, v.GetBackpack());
+            collectable.RemoveFromBackpack(v, v.getBackpack());
             collectable.Remove(v);
             f.Add(v, collectable);
         }
