@@ -73,7 +73,7 @@ public class ActionPanel extends JPanel implements ActionListener {
         move.setUI(new StyledMenuButtonUI());
         move.setBackground(actionColor);
         move.setBounds(xGap, 2 * yGap + height, width, height);
-        move.setName("MoveActionBtn");
+        move.setName("moveActionBtn");
         this.add(move);
 
         learn = new JButton("Learn");

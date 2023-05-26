@@ -2,8 +2,11 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType<Test> {
+tasks.test {
     useJUnitPlatform()
+    filter {
+        includeTestsMatching("**cucumber**")
+    }
 }
 
 plugins {
@@ -15,10 +18,17 @@ application {
     mainClass.set("Main")
 }
 
+
 sourceSets {
     main {
         java {
             srcDir("src")
+        }
+    }
+    test {
+        java {
+            srcDir("src/test")
+            exclude("**ui**")
         }
     }
 }
@@ -34,6 +44,12 @@ sonarqube {
 tasks.withType<Jar>{
     manifest {
         attributes["Main-Class"] = "Main"
+    }
+}
+
+tasks.create<Test>("Run UI Test") {
+    filter {
+        includeTestsMatching("ui.*")
     }
 }
 
