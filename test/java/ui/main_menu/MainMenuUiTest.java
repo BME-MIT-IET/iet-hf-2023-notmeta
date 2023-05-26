@@ -1,4 +1,4 @@
-package ui.main_menu;
+package java.ui.main_menu;
 
 import game.ui.SceneLauncher;
 import game.ui.game.GameScene;
@@ -8,8 +8,8 @@ import org.assertj.swing.fixture.JButtonFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ui.util.PlayerNames;
-import ui.util.TestComponentNames;
+import java.ui.util.PlayerNames;
+import java.ui.util.TestComponentNames;
 
 import static org.junit.Assert.assertEquals;
 

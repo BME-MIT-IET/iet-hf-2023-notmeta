@@ -8,6 +8,7 @@ plugins {
     id("org.sonarqube") version("4.0.0.2929")
 }
 
+
 tasks.test {
     useJUnitPlatform()
     filter {
@@ -38,7 +39,7 @@ sourceSets {
     }
     test {
         java {
-            srcDir("src/test")
+            srcDir("test")
             exclude("**ui**")
         }
     }
@@ -58,9 +59,15 @@ tasks.withType<Jar>{
     }
 }
 
-tasks.create<Test>("Run UI Test") {
+tasks.create<Test>("Run Ui Test") {
     filter {
         includeTestsMatching("ui.*")
+    }
+}
+
+tasks.create<Test>("Run Cucumber Test") {
+    filter {
+        includeTestsMatching("cucumber.*")
     }
 }
 

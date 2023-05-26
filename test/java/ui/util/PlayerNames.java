@@ -1,4 +1,4 @@
-package ui.util;
+package java.ui.util;
 
 public class PlayerNames{
     public static final String VALID_PLAYER_NAME1 ="validN1";
