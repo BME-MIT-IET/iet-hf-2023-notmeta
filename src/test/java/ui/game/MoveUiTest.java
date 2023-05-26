@@ -6,6 +6,7 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ui.util.PlayerNames;
 import ui.util.TestComponentNames;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class MoveUiTest {
     public void setUp() {
         launcher = new SceneLauncher();
         ArrayList<String> players = new ArrayList<>();
-        players.add("alma");
+        players.add(PlayerNames.VALID_PLAYER_NAME1);
         launcher.SetPlayerNames(players);
         launcher.SwitchScenes(SceneLauncher.GLOBALGAMESTATES.Game);
         gameScene = (GameScene) launcher.getCurrentScene(); //GuiActionRunner.execute(() -> (GameScene) launcher.getCurrentScene());

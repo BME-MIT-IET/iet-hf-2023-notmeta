@@ -4,9 +4,11 @@ import game.ui.SceneLauncher;
 import game.ui.game.GameScene;
 import game.ui.menu.MenuScene;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JButtonFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ui.util.PlayerNames;
 import ui.util.TestComponentNames;
 
 import static org.junit.Assert.assertEquals;
@@ -15,74 +17,69 @@ public class MainMenuTest {
     private FrameFixture window;
     private MenuScene menuScene;
     private SceneLauncher launcher;
-
+    private JButtonFixture startGameButton;
+    private JButtonFixture resetPlayersButton;
+    private JButtonFixture addNewPlayerButton;
     @Before
     public void setUp() {
         launcher = new SceneLauncher();
-        menuScene = (MenuScene)launcher.getCurrentScene();
+        menuScene = (MenuScene) launcher.getCurrentScene();
         window = new FrameFixture(menuScene);
+        startGameButton = window.button(TestComponentNames.START_GAME);
+        resetPlayersButton = window.button(TestComponentNames.RESET_PLAYERS);
+        addNewPlayerButton = window.button(TestComponentNames.NEW_PLAYER);
         window.show();
     }
 
     @Test
-    public void startGameWithZeroPlayers(){
+    public void startGameWithZeroPlayers() {
         //ARRANGE
 
         //ACT
-        window.button(TestComponentNames.START_GAME).click();
+        startGameButton.click();
 
         //ASSERT
-        assertEquals( launcher.getCurrentScene(), menuScene);
+        assertEquals(launcher.getCurrentScene(), menuScene);
     }
 
     @Test
-    public void startGameWithAddingPlayerWithTooLongName(){
+    public void startGameWithAddingPlayerWithTooLongName() {
         //ARRANGE
-        var TOO_LONG_NAME = "12345678901";
 
         //ACT
-        window.button(TestComponentNames.NEW_PLAYER).click();
-        var optionPaneFixture = window.optionPane();
-        optionPaneFixture.textBox().enterText(TOO_LONG_NAME);
-        optionPaneFixture.okButton().click();
+        addPlayerToTest(PlayerNames.INVALID_PLAYER_NAME);
+
         var optionPaneTooLong = window.optionPane();
         optionPaneTooLong.okButton().click();
-        window.button(TestComponentNames.START_GAME).click();
+
+        startGameButton.click();
 
         //ASSERT
         assertEquals(launcher.getCurrentScene().getClass(), MenuScene.class);
     }
 
     @Test
-    public void startGameWithAddingPlayers(){
+    public void startGameWithAddingPlayers() {
         //ARRANGE
-        var PLAYER_NAME = "testPlayer";
 
         //ACT
-        window.button(TestComponentNames.NEW_PLAYER).click();
-        var optionPaneFixture = window.optionPane();
-        optionPaneFixture.textBox().enterText(PLAYER_NAME);
-        optionPaneFixture.okButton().click();
-        window.button(TestComponentNames.START_GAME).click();
+        addPlayerToTest(PlayerNames.VALID_PLAYER_NAME1);
+        startGameButton.click();
 
         //ASSERT
         assertEquals(launcher.getCurrentScene().getClass(), GameScene.class);
     }
 
     @Test
-    public void reachedMaxPlayerCount(){
+    public void reachedMaxPlayerCount() {
         //ARRANGE
-        var PLAYER_NAME = "testPlayer";
 
-        for(int i=0;i<4;i++){
-            window.button(TestComponentNames.NEW_PLAYER).click();
-            var optionPaneFixture = window.optionPane();
-            optionPaneFixture.textBox().enterText(PLAYER_NAME);
-            optionPaneFixture.okButton().click();
+        for (int i = 0; i < 4; i++) {
+            addPlayerToTest(PlayerNames.VALID_PLAYER_NAME1);
         }
 
         //ACT
-        window.button(TestComponentNames.NEW_PLAYER).click();
+        addNewPlayerButton.click();
         var maxPlayerCount = window.optionPane();
 
         //ASSERT
@@ -90,25 +87,18 @@ public class MainMenuTest {
     }
 
     @Test
-    public void addPlayersAndResetPlayers(){
+    public void addPlayersAndResetPlayers() {
         //ARRANGE
-        var PLAYER1_NAME = "Player1";
-        var PLAYER2_NAME = "Player2";
 
         //ACT
-        window.button(TestComponentNames.NEW_PLAYER).click();
-        var player1ModalWindowForName = window.optionPane();
-        player1ModalWindowForName.textBox().enterText(PLAYER1_NAME);
-        player1ModalWindowForName.okButton().click();
-        window.button(TestComponentNames.NEW_PLAYER).click();
-        var player2ModalWindowForName = window.optionPane();
-        player2ModalWindowForName.textBox().enterText(PLAYER2_NAME);
-        player2ModalWindowForName.okButton().click();
+        addPlayerToTest(PlayerNames.VALID_PLAYER_NAME1);
+        addPlayerToTest(PlayerNames.VALID_PLAYER_NAME2);
 
         //Reset Added players
-        window.button(TestComponentNames.RESET_PLAYERS).click();
+        resetPlayersButton.click();
         //Trying to start game, should fail
-        window.button(TestComponentNames.START_GAME).click();
+        startGameButton.click();
+
         //ASSERT
         assertEquals(launcher.getCurrentScene().getClass(), MenuScene.class);
     }
@@ -116,5 +106,12 @@ public class MainMenuTest {
     @After
     public void tearDown() {
         window.cleanUp();
+    }
+
+    private void addPlayerToTest(String playerName) {
+        addNewPlayerButton.click();
+        var player1ModalWindowForName = window.optionPane();
+        player1ModalWindowForName.textBox().enterText(playerName);
+        player1ModalWindowForName.okButton().click();
     }
 }
