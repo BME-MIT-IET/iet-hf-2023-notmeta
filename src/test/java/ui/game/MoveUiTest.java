@@ -24,8 +24,8 @@ public class MoveUiTest {
         launcher = new SceneLauncher();
         ArrayList<String> players = new ArrayList<>();
         players.add(PlayerNames.VALID_PLAYER_NAME1);
-        launcher.SetPlayerNames(players);
-        launcher.SwitchScenes(SceneLauncher.GLOBALGAMESTATES.Game);
+        launcher.setPlayerNames(players);
+        launcher.switchScenes(SceneLauncher.GLOBAL_GAME_STATES.GAME);
         gameScene = (GameScene) launcher.getCurrentScene(); //GuiActionRunner.execute(() -> (GameScene) launcher.getCurrentScene());
         window = new FrameFixture(gameScene);
         window.show();
@@ -41,7 +41,7 @@ public class MoveUiTest {
         window.button(TestComponentNames.MOVE_BUTTON).requireDisabled();
 
         //ASSERT
-        assertEquals(NEIGHBOR_FIELD, gameScene.GetCurrentField().GetID());
+        assertEquals(NEIGHBOR_FIELD, gameScene.getCurrentField().getId());
     }
 
     @After

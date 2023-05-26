@@ -43,15 +43,15 @@ public class SceneLauncher {
      * Function that responsible for changing the different states, and scenes for the game;
      * @param globalGameState the state that resembles the scene
      */
-    public void SwitchScenes(GLOBALGAMESTATES globalgamestates){
-        switch (globalgamestates){
-            case Menu:
+    public void switchScenes(GLOBAL_GAME_STATES globalGameState){
+        switch (globalGameState){
+            case MENU:
                 currentScene = new MenuScene(this);
                 break;
-            case Game:
+            case GAME:
                 currentScene = new GameScene(this,players);
                 break;
-            case End:
+            case END:
                 currentScene = new EndScene(this);
                 break;
         }
