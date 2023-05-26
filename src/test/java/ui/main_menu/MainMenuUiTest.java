@@ -13,7 +13,7 @@ import ui.util.TestComponentNames;
 
 import static org.junit.Assert.assertEquals;
 
-public class MainMenuTest {
+public class MainMenuUiTest {
     private FrameFixture window;
     private MenuScene menuScene;
     private SceneLauncher launcher;
