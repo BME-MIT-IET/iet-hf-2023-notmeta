@@ -44,6 +44,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(Welcome);
 
         StartGame = new JButton("Start Game");
+        StartGame.setName("startGame");
         StartGame.setFont(new Font("Calibri", Font.PLAIN, 50));
         StartGame.setBackground(new Color(0x2dce98));
         StartGame.setUI(new StyledMenuButtonUI());
@@ -54,6 +55,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         NewPlayer = new JButton("New player");
+        NewPlayer.setName("newPlayer");
         NewPlayer.setFont(new Font("Calibri", Font.PLAIN, 50));
         NewPlayer.setBackground(new Color(0x2dce98));
         NewPlayer.setUI(new StyledMenuButtonUI());
@@ -66,6 +68,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 
         Players = new JLabel("Players:");
         Players.setFont(new Font("Calibri", Font.PLAIN, 60));
+        Players.setName("players");
         Players.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(Players);
 
@@ -75,6 +78,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(playersPanel);
 
         ResetGame = new JButton("Reset players");
+        ResetGame.setName("resetPlayers");
         ResetGame.setFont(new Font("Calibri", Font.PLAIN, 10));
         ResetGame.addActionListener(this);
         ResetGame.setUI(new StyledMenuButtonUI());

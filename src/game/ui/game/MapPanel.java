@@ -34,7 +34,9 @@ public class MapPanel extends JLayeredPane {
         for(DField df: gameScene.getVisibleFields()){
             df.setMapPanel(this);
             JButton fieldButton = df.Draw();
+
             fieldButton.setName(df.getId());
+
             fieldButton.setBounds(df.GetCoords().x - 25, df.GetCoords().y -25, 50,50);
             this.add(fieldButton, 0);
         }
